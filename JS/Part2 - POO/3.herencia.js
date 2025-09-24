@@ -14,7 +14,7 @@ class User {
     toString() {
         return `${this.nombre} (${this.edad})`;
     }
-    valueOf() { // OJO!!! sino pones toString entra aquí
+    valueOf() { 
         return this.edad; // Los objetos se compararán por edad
     }
 }

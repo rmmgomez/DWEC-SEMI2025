@@ -14,6 +14,7 @@ console.log(p); // Product {nombre: "Producto", precio: 50}
 console.log(typeof Product); // Imprime "function". Internamente sigue siendo una función como en versiones antiguas
 console.log(p.getDescuento(20)); // Imprime 40
 
+
 class User {
     #name;
 

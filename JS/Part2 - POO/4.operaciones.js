@@ -51,7 +51,7 @@ const coche = {
 const cilindros = coche?.motor?.cilindros;
 console.log(cilindros); // undefined (no hay error)
 
-const usuarios = [
+/* const usuarios = [
   { nombre: 'Ana' },
   { nombre: 'Luis' }
 ];
@@ -85,4 +85,4 @@ const configuracion = {
 
 const temaActual = configuracion.tema?.color ?? 'claro'; // configuracion.tema devuelve "undefined"
 
-console.log(temaActual); // "claro"
+console.log(temaActual); // "claro" */

@@ -20,12 +20,12 @@ let obJSON = {
     edad: 41,
     trabajos: [ // trabajos es un array de objetos JSON
       {
-          descripcion: "Malabarista",
-          duracion: "2003-2005"
+          "descripcion": "Malabarista",
+          "duracion": "2003-2005"
       },
       {
-          descripcion: "Conductor de autobús",
-          duracion: "2005-2015"
+          "descripcion": "Conductor de autobús",
+          "duracion": "2005-2015"
       }
     ],
     getInfo () { // Método
