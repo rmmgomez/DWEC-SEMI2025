@@ -1,6 +1,7 @@
 'use strict';
 
 setTimeout(() => console.log("Hora: " + new Date().toString()), 5000);  // Se ejecutará en 5 segundos (5000 ms)
+
 // setTimeout devuelve un número con el id, y a partir de ahí, podremos cancelarlo
 let idTime = setTimeout(() => console.log("TimeOut: " + new Date().toString()), 5000);
 
