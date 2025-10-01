@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa del Tesoro del DOM</title>
+    <link rel="stylesheet" href="ex-dom.css">
+    <script src="ex-dom.js" defer></script>
+</head>
+
+<body>
+
+    <div class="container" id="mapa-del-tesoro">
+
+        <header class="seccion">
+            <h1>Actividad del DOM</h1>
+            <p>Usa la consola para encontrar los elementos descritos en el script.</p>
+        </header>
+
+        <main>
+            <section class="seccion" id="articulo-principal" data-status="activo">
+                <h2>Pista 1: El Inicio</h2>
+                <p>Este es el primer lugar donde debes buscar.</p>
+                <div class="item" id="item-unico">Soy un objeto único y valioso.</div>
+                <p class="texto-importante">Cuidado con las trampas.</p>
+            </section>
+
+            <section class="seccion" data-status="inactivo">
+                <h2>Pista 2: La Lista de Herramientas</h2>
+                <p>Necesitarás estas herramientas para continuar:</p>
+                <ul id="lista-herramientas">
+                    <li class="item herramienta">Mapa</li>
+                    <li class="item herramienta" id="brujula">Brújula</li>
+                    <li class="item herramienta">Pala</li>
+                </ul>
+                <p>Usa la brújula con sabiduría.</p>
+            </section>
+
+            <section class="seccion" data-status="activo">
+                <h2>Pista 3: Los Guardianes</h2>
+                <p class="guardian">El primer guardián.</p>
+                <div class="guardian">
+                    <p>El segundo guardián, más escondido.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="seccion">
+            <p>Has llegado al final. ¿Encontraste todo?</p>
+            <a href="#" target="_self">Volver al inicio</a>
+            <a href="https://developer.mozilla.org/" target="_blank">Consultar documentación</a>
+        </footer>
+
+    </div>
+</body>
+
+</html>

@@ -1,10 +1,12 @@
 console.log(location.href); // Imprime la URL actual
 console.log(location.host); // Imprime el nombre del servidor (o la IP) como “localhost” 192.168.0.34
-console.log(location.port); // Imprime el número del puerto (normalmente 80)
+console.log("Puerto " + location.port); // Imprime el número del puerto (normalmente 80)
 console.log(location.protocol); // Imprime el protocolo usado (http ó https)
 console.log(location.search); // Imprime los parámetros de búsqueda de la url (Ej: '?p1=1&p2=2')
+console.log(location.hash); // https://miweb.com#identificador <-- identificador = hash
 
-location.reload(); // Recarga la página actual
+
+// location.reload(); // Recarga la página actual
 /* location.assign("https://google.com"); // Carga una nueva página */
 /* location.replace("https://google.com"); // Carga una nueva página sin guardar la actual en el objeto history */
 
