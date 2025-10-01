@@ -15,9 +15,9 @@ let div1 = document.getElementById("verd");
 let div2 = document.getElementById("red");
 let div3 = document.getElementById("blue");
 
-/* div1.addEventListener("click", divClick);
+div1.addEventListener("click", divClick);
 div2.addEventListener("click", divClick);
-div3.addEventListener("click", divClick); */
+div3.addEventListener("click", divClick);
 
 /* div1.addEventListener("click", divClick, true);
 div2.addEventListener("click", divClick, true);
