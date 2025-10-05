@@ -80,3 +80,8 @@ form {
     font-size: 1.2em;
     color: #333;
 }
+.opciones label {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+}

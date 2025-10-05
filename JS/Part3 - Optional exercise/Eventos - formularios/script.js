@@ -47,6 +47,12 @@ miFormulario.addEventListener('submit', function(event) {
     event.preventDefault(); 
     
     const nombreUsuario = campoNombre.value;
+    const opcionSeleccionada = document.querySelector('input[name="lenguaje"]:checked');
+     if (opcionSeleccionada) {
+        const valor = opcionSeleccionada.value;
+        console.log(`Tu lenguaje favorito es: ${valor}`);
+    } else console.log('Por favor, selecciona una opción.');
+    
     parrafoMensaje.textContent = `¡Hola, ${nombreUsuario}! Formulario enviado correctamente.`;
     miFormulario.reset(); // Método que limpia todos los campos del formulario
     botonEnviar.disabled = true; // Volver a deshabilitar el botón

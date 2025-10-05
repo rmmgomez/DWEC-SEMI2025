@@ -15,7 +15,20 @@
     <form id="saludoForm">
         <label for="nombre">Introduce tu nombre (mín. 3 letras):</label>
         <input type="text" id="nombre" name="nombre" required placeholder="Haz clic aquí...">
-
+        <div class="opciones">
+            <label>
+                <input type="radio" name="lenguaje" value="JavaScript">
+                JavaScript
+            </label>
+            <label>
+                <input type="radio" name="lenguaje" value="Python">
+                Python
+            </label>
+            <label>
+                <input type="radio" name="lenguaje" value="Java">
+                Java
+            </label>
+        </div>
         <div class="terminos">
             <input type="checkbox" id="terminos" name="terminos">
             <label for="terminos">Acepto los términos y condiciones</label>
@@ -25,7 +38,7 @@
     </form>
 
     <p id="mensaje"></p>
-    
+
 </body>
 
 </html>
