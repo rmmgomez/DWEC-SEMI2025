@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Formulario con Validación</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <h1>Formulario de Saludo</h1>
+    <form id="saludoForm">
+        <label for="nombre">Introduce tu nombre (mín. 3 letras):</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Haz clic aquí...">
+
+        <div class="terminos">
+            <input type="checkbox" id="terminos" name="terminos">
+            <label for="terminos">Acepto los términos y condiciones</label>
+        </div>
+
+        <button type="submit" id="enviarBtn" disabled>Enviar</button>
+    </form>
+
+    <p id="mensaje"></p>
+    
+</body>
+
+</html>
