@@ -11,8 +11,8 @@
 // Imprimirá el mensaje pasados 3 segundos (la promesa termina)
 getPromise().then(() => console.log("La promesa ha acabado!"));
 
-console.log("El programa continúa. No espera que termine la promesa (operación asíncrona)"); */
-
+console.log("El programa continúa. No espera que termine la promesa (operación asíncrona)");
+ */
 
 function sumPromise(n1, n2, time = 2000) {
     if (n1 < 0 || n2 < 0) {
@@ -29,7 +29,7 @@ function mostrarResultado(n) {
     console.log(`El resultado de concatenar varias es: ${n}`)
 }
 
-/* sumPromise(4, 6).then((r1) => { // 10
+/* sumPromise(-4, 6).then((r1) => { // 10
     return sumPromise(r1, 10);
 }).then((r2) => { // 20
     return r2 + 100;
@@ -76,10 +76,10 @@ status, value y reason(motivo del rejected) */
 .catch(error => console.log(error)); // [11, 21, 44] */
 
 /**Resultado de la promesa más rápida */
-Promise.race([
+/* Promise.race([
     sumPromise(4, 7, 3000),
     sumPromise(9, 12, 1500),
     sumPromise(8, 36, 5000),
-]).then(res => console.log(res));
+]).then(res => console.log(res)); */
 
 

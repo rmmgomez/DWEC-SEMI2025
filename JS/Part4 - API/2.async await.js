@@ -21,7 +21,7 @@ async function executeSum(n1, n2) {
 
 executeSum(4, 7);
 executeSum(4, -7);
-
+console.log("Hola mundo");
 document.getElementById("btn").addEventListener("click", e => {
     document.getElementById("p1").textContent = "Hello world!";
 });
