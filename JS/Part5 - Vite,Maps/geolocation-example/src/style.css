@@ -1,0 +1,10 @@
+@import "@geoapify/geocoder-autocomplete/styles/minimal.css";
+
+.autocomplete-container {
+    position: relative;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+}

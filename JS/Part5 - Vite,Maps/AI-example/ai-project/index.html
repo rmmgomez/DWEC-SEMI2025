@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="./src/main.js"></script>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <p>Introduzca el texto a traducir/resumir: <textarea type="text" id="input" rows="5" cols="50"></textarea></p>
+    <p>
+        <select id="lang">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+        </select>
+        <button id="btnTraducir">Translate</button><button id="btnResumir">Resumir</button></p>
+        
+    <p>Traducción: <textarea type="text" id="traducido" rows="5" cols="50" readonly></textarea></p>    
+    <p>Resumen: <textarea type="text" id="resumido" rows="5" cols="50" readonly></textarea></p>
+</body>
+</html>

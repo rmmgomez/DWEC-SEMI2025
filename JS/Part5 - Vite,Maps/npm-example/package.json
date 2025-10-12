@@ -1,0 +1,21 @@
+{
+  "name": "npm-example",
+  "version": "1.0.0",
+  "description": "Ejemplo de proyecto con npm",
+  "license": "ISC",
+  "author": "Rosa Medina",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server",
+    "test": "eslint index.js",
+    "hola": "echo \"Hola mundo\""
+  },
+  "dependencies": {
+    "dayjs": "^1.11.18"
+  },
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "uglify-js": "^3.19.3"
+  }
+}
