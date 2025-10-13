@@ -1,7 +1,6 @@
 import {ProductsService} from './products-service.js';
 
 const productsService = new ProductsService();
-
 const productsTable = document.getElementById("products");
 const formProducto = document.getElementById("formProducto");
 const imgPreview = document.getElementById("imgPreview");
