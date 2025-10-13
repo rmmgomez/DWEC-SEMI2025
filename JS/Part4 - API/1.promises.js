@@ -14,6 +14,52 @@ getPromise().then(() => console.log("La promesa ha acabado!"));
 console.log("El programa continúa. No espera que termine la promesa (operación asíncrona)"); */
 
 
+/* const promesaFallida = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        reject("Algo salió mal.");
+    }, 1500);
+});
+
+promesaFallida
+    .then((mensaje) => {
+        console.log(mensaje); // Este bloque no se ejecutará
+    })
+    .catch((error) => {
+        console.error(error); // Se ejecuta para manejar el error
+    }).finally(() => console.log("Aquí entro tanto si todo ha ido bien como si no")); */
+
+/* function obtenerUsuario() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Usuario obtenido.");
+            resolve({ id: 1, nombre: "Juan" });
+        }, 1000);
+    });
+}
+
+function obtenerPublicaciones(userId) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log(`Publicaciones del usuario ${userId} obtenidas.`);
+            resolve(["Post 1", "Post 2"]);
+        }, 1000);
+    });
+}
+
+obtenerUsuario()
+    .then((usuario) => {
+        console.log(`Usuario encontrado: ${usuario.nombre}`);
+        // La clave: retornamos una nueva promesa
+        return obtenerPublicaciones(usuario.id);
+    })
+    .then((publicaciones) => {
+        console.log("Publicaciones:", publicaciones);
+    })
+    .catch((error) => {
+        console.error("Error en la cadena:", error);
+    }); */
+
+
 function sumPromise(n1, n2, time = 2000) {
     if (n1 < 0 || n2 < 0) {
         return Promise.reject("Can't add negative numbers");
