@@ -63,8 +63,10 @@ getProducts();
   });
 });
 
-formProducto.addEventListener("submit", async (e) => {
-  e.preventDefault();
+formProducto.addEventListener("submit", addProduct);
+
+async function addProduct(event: Event) {  
+  event.preventDefault();
 
   const product = {
     description: (formProducto.description as HTMLInputElement).value,
@@ -77,4 +79,4 @@ formProducto.addEventListener("submit", async (e) => {
   showProduct(await productsService.add(product));
   formProducto.reset();
   imgPreview.src = "";
-});
+}
