@@ -83,6 +83,19 @@ formProducto.image.addEventListener("change", (e) => {
   });
 });
 
+formulario.foto.addEventListener('change',  () => {
+    const file   = formulario.foto.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => { // Evento de conversión a Base64 completa (asíncrono)
+        imagePreview.src = reader.result; // Mostramos la imagen cargada en un elemento <img> (previsualización)
+    }, false);
+
+    if (file) { // Si se ha seleccionado un archivo válido (convertir a Base64)
+        reader.readAsDataURL(file);
+    }
+});
+
 formProducto.addEventListener("submit", (e) => {
   e.preventDefault();
 
