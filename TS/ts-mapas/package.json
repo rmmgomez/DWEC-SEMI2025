@@ -1,0 +1,19 @@
+{
+  "name": "ts-mapas",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7"
+  },
+  "dependencies": {
+    "@geoapify/geocoder-autocomplete": "^2.2.1",
+    "ol": "^10.6.1"
+  }
+}
