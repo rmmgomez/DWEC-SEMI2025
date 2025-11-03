@@ -1,5 +1,5 @@
-let personName = "John"; // Tipo implícito -> string
-/* personName = 34; // ERROR: Type 'number' is not assignable to type 'string'. */
+const personName = "John"; // Tipo implícito -> string
+/* personName = 34; */ // ERROR: Type 'number' is not assignable to type 'string'.
 console.log(personName);
 
 /*** TIPO INPLICITO ANY */
@@ -21,17 +21,15 @@ num++;
 /* num = "Hola"; // ERROR: Type 'string' is not assignable to type 'number' */
 console.log(num);
 
-
 /** ARRAYS  */
 const arrNum: number[] = [];
 arrNum[0] = 24; // Ok
 arrNum[1] = 35; // Ok
-/* arrNum[2] = "34"; // Error: Type 'string' is not assignable to type 'number' */
+/* arrNum[2] = "34"; */ // Error: Type 'string' is not assignable to type 'number'
 /* arrNum.push("Hola");  // Error: Argument of type 'string' is not assignable to parameter of type 'number' */
 
 const a2: Array<string> = [];
 a2.push("Hola"); // Ok
-
 
 /** FUNCIONES */
 function suma(n1: number, n2: number): number {
@@ -49,14 +47,18 @@ console.log(saluda() + " chicos");
 /** FUNCIONES FLECHA */
 
 // Recibe 2 parámetros de tipo number y devuelve un number
-let  f: (n1: number, n2: number) => number;
+let f: (n1: number, n2: number) => number;
 // No hace falta tipar parámetros o lo que devuelve al declararla
 f = (n1, n2) => n1 + n2;
 console.log(f(3, 5)); // 8
 f = (n1, n2) => n1 - n2;
 console.log(f(3, 5)); // -2
 
-function operar(n1: number, n2: number, f: (n1: number, n2: number) => number): number {
+function operar(
+    n1: number,
+    n2: number,
+    f: (n1: number, n2: number) => number
+): number {
     return f(n1, n2);
 }
 
@@ -169,3 +171,8 @@ edad => 42
 
 const p = new Persona("Juan", 34);
 console.log(`${p.nombre} - ${p.edad}`); // Juan - 34 */
+
+let variable = 3;
+if (variable) {
+    console.log("hola");
+}

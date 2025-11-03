@@ -6,6 +6,7 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
+    "prestart": "eslint src/*.ts",
     "preview": "vite preview"
   },
   "devDependencies": {

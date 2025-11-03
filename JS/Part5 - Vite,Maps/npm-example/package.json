@@ -8,13 +8,17 @@
   "main": "index.js",
   "scripts": {
     "start": "lite-server",
-    "test": "eslint index.js",
-    "hola": "echo \"Hola mundo\""
+    "hola": "echo \"Hola mundo\"",
+    "test": "eslint src/*.js"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "dayjs": "^1.11.18"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "globals": "^16.4.0",
     "lite-server": "^2.6.1",
     "uglify-js": "^3.19.3"
   }
