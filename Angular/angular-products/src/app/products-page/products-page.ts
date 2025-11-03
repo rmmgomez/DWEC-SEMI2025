@@ -48,8 +48,7 @@ export class ProductsPage {
   toggleImage() {
     this.showImage = !this.showImage;
   }
-  changeImage(event: Event) {
-    const fileInput = event.target as HTMLInputElement;
+  changeImage(fileInput: HTMLInputElement) {
     if (!fileInput.files?.length) return;
     const reader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
@@ -60,11 +59,11 @@ export class ProductsPage {
   }
 
 
-  addProduct() {
+  addProduct(productForm: NgForm) {
     this.newProduct.id = Math.max(...this.products.map(p => p.id!)) + 1;
-    this.products.push(this.newProduct);
-    this.fileName = '';
-    this.resetProduct();
+    this.products.push({...this.newProduct}); // Clonamos objeto antes de añadirlo
+    productForm.resetForm();
+    this.newProduct.imageUrl = '';
   }
 
   private resetProduct() {
