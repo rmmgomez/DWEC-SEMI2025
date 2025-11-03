@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { NgClass } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -39,6 +39,7 @@ export class ProductsPage {
     price: 0,
   };
   fileName = '';
+  #changeDetector = inject(ChangeDetectorRef); // Necessary in new Angular zoneless apps
 
   constructor() {
     this.resetProduct();
@@ -47,21 +48,23 @@ export class ProductsPage {
   toggleImage() {
     this.showImage = !this.showImage;
   }
-  changeImage(fileInput: HTMLInputElement) {
-    // Referencia directa al input
+  changeImage(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
     if (!fileInput.files?.length) return;
     const reader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
     reader.addEventListener('loadend', () => {
       this.newProduct.imageUrl = reader.result as string;
+      this.#changeDetector.markForCheck(); // Necessary in new Angular zoneless apps
     });
   }
 
-  addProduct(productForm: NgForm) {
-    this.newProduct.id = Math.max(...this.products.map((p) => p.id!)) + 1;
-    this.products.push({ ...this.newProduct }); // Clonamos objeto antes de añadirlo
-    productForm.resetForm();
-    this.newProduct.imageUrl = '';
+
+  addProduct() {
+    this.newProduct.id = Math.max(...this.products.map(p => p.id!)) + 1;
+    this.products.push(this.newProduct);
+    this.fileName = '';
+    this.resetProduct();
   }
 
   private resetProduct() {
@@ -71,7 +74,8 @@ export class ProductsPage {
       available: '',
       imageUrl: '',
       rating: 1,
-      price: 0,
+      price: 0
     };
+    this.fileName = '';
   }
 }
