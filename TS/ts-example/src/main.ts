@@ -111,8 +111,8 @@ console.log(p1);
  */
 
 class Persona {
-    nombre: string;
-    edad: number;
+    nombre: string = "";
+    edad: number = 0;
 
     constructor(nombre: string, edad: number) {
         this.nombre = nombre;
@@ -146,4 +146,4 @@ const rectArray: Rectangulo[] = [
         ancho: 17,
     },
 ];
-rectArray.forEach(r => console.log(`Área: ${r.alto * r.ancho}`));
+rectArray.forEach((r) => console.log(`Área: ${r.alto * r.ancho}`));
