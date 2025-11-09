@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  computed,
   inject,
   signal,
 } from '@angular/core';
@@ -9,10 +10,12 @@ import { Product } from '../interfaces/product';
 import { CurrencyPipe, DatePipe, NgClass, UpperCasePipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ProductFilterPipe } from '../pipes/product-filter-pipe';
+import { IntlCurrencyPipe } from "../pipes/intl-currency-pipe";
+import { ProductItem } from "../product-item/product-item";
 
 @Component({
   selector: 'products-page',
-  imports: [NgClass, FormsModule, DatePipe, UpperCasePipe, CurrencyPipe, ProductFilterPipe],
+  imports: [NgClass, FormsModule, DatePipe, UpperCasePipe, CurrencyPipe, ProductFilterPipe, IntlCurrencyPipe, ProductItem],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -90,4 +93,11 @@ export class ProductsPage {
   deleteProduct(product: Product) {
     this.products.update((products) => products.filter((p) => p !== product));
   }
+  filteredProducts = computed(() => {
+    return this.search()
+      ? this.products().filter((p) =>
+          p.description.toLowerCase().includes(this.search().toLowerCase())
+        )
+      : this.products();
+  });
 }

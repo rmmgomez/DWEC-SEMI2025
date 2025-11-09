@@ -60,7 +60,7 @@
                 Filtered by: {{ search() }}
             </div>
         </div>
-        @if (products().length) {
+        @if (filteredProducts().length) {
         <div class="table-responsive">
             <table class="table table-striped m-0">
                 <thead>
@@ -81,17 +81,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (product of products() | productFilter:search(); track product.id) {
-                    @let img = product.imageUrl;
-                    <tr>
-                        <td><img [src]="img" [class.d-none]="!this.showImage()" [alt]="product.description | uppercase"
-                                [title]="product.description | uppercase"></td>
-                        <td>{{product.description}}</td>
-                        <td>{{product.price | currency:'EUR':'symbol' }}</td>
-                        <td>{{product.available | date:'dd/MM/yyyy'}}</td>
-                        <td><button (click)="deleteProduct(product)" class="btn btn-danger btn-sm fw-bold">X</button>
-                        </td>
-                    </tr>
+                    @for (product of filteredProducts(); track product.id) {
+                    <tr product-item></tr>
                     }
                 </tbody>
             </table>
