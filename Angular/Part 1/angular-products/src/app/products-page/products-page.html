@@ -72,7 +72,8 @@
                     @for (product of products; track product.id) {
                     @let img = product.imageUrl;
                     <tr>
-                        <td><img [src]="img" [class.d-none]="!showImage" alt=""></td>
+                        <td><img [src]="img" [class.d-none]="!this.showImage" [alt]="product.description"
+                                [title]="product.description"></td>
                         <td>{{product.description}}</td>
                         <td>{{product.price}}</td>
                         <td>{{product.available}}</td>
