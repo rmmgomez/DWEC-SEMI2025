@@ -1,40 +1,45 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { NgClass } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { ProductItem } from '../product-item/product-item';
 import { ProductForm } from '../product-form/product-form';
 import { FormsModule } from '@angular/forms';
+import { ProductsService } from '../services/products-service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
 @Component({
   selector: 'products-page',
-  imports: [NgClass, ProductItem, ProductForm, FormsModule],
+  imports: [NgClass, ProductItem, ProductForm, FormsModule, AsyncPipe],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsPage {
   title = 'Mi lista de productos';
-  products = signal<Product[]>([
-    {
-      id: 1,
-      description: 'SSD hard drive',
-      available: '2016-10-03',
-      price: 75,
-      imageUrl: '/ssd.jpg',
-      rating: 5,
-    },
-    {
-      id: 2,
-      description: 'LGA1151 Motherboard',
-      available: '2016-09-15',
-      price: 96.95,
-      imageUrl: '/motherboard.jpg',
-      rating: 4,
-    },
-  ]);
+  products = signal<Product[]>([]); /* Ahora los obtenemos del servicio */
   showImage = signal(true);
   fileName = '';
   search = signal('');
+  #productsService = inject(ProductsService); // Inyectamos el servicio
+ products$ = new BehaviorSubject<Product[]>([]);
+
+  filteredProducts$ = combineLatest([
+    this.products$,
+    toObservable(this.search),
+  ]).pipe(
+    map(([products, search]) => {
+      return search
+        ? products.filter((p) =>
+            p.description.toLowerCase().includes(this.search().toLowerCase())
+          )
+        : products;
+    })
+  );
+
+  constructor() {
+    this.#productsService.getProducts().subscribe(p => this.products$.next(p));
+  }
 
   toggleImage() {
     // this.showImage.set(!this.showImage());
@@ -42,19 +47,10 @@ export class ProductsPage {
   }
 
   addProduct(product: Product) {
-    product.id = Math.max(...this.products().map((p) => p.id!)) + 1;
-    this.products.update((products) => [...products, product]);
+    this.products$.next([...this.products$.getValue(), product]);
   }
 
   deleteProduct(product: Product) {
-    this.products.update((products) => products.filter((p) => p !== product));
+    this.products$.next(this.products$.getValue().filter(p => p !== product));
   }
-
-  filteredProducts = computed(() => {
-    return this.search()
-      ? this.products().filter((p) =>
-          p.description.toLowerCase().includes(this.search().toLowerCase())
-        )
-      : this.products();
-  });
 }
