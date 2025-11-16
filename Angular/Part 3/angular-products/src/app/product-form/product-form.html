@@ -22,9 +22,9 @@
             </label>
             <label class="mb-3 row">
                 <span class="col-sm-2 col-form-label text-sm-end"> Image</span>
-                <div class="col-sm-10">                    
-                    <input type="file" class="form-control" accept="image/*" encodeBase64 (encoded)="newProduct.imageUrl = $event"
-                        name="fileName" ngModel />
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" accept="image/*" encodeBase64Directive
+                        (encoded)="newProduct.imageUrl = $event" name="fileName" ngModel />
                 </div>
             </label>
             @if (newProduct.imageUrl) {

@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { AsyncPipe, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ProductItem } from '../product-item/product-item';
 import { ProductForm } from '../product-form/product-form';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../services/products-service';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'products-page',
-  imports: [NgClass, ProductItem, ProductForm, FormsModule, AsyncPipe],
+  imports: [NgClass, ProductItem, ProductForm, FormsModule],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,23 +22,24 @@ export class ProductsPage {
   fileName = '';
   search = signal('');
   #productsService = inject(ProductsService); // Inyectamos el servicio
- products$ = new BehaviorSubject<Product[]>([]);
+  products$ = new BehaviorSubject<Product[]>([]);
 
-  filteredProducts$ = combineLatest([
-    this.products$,
-    toObservable(this.search),
-  ]).pipe(
-    map(([products, search]) => {
-      return search
-        ? products.filter((p) =>
-            p.description.toLowerCase().includes(this.search().toLowerCase())
-          )
-        : products;
-    })
-  );
+  filteredProducts = computed(() => {
+    return this.search()
+      ? this.products().filter((p) =>
+          p.description.toLowerCase().includes(this.search().toLowerCase())
+        )
+      : this.products();
+  });
 
   constructor() {
-    this.#productsService.getProducts().subscribe(p => this.products$.next(p));
+    this.#productsService
+      .getProducts()
+      .pipe(takeUntilDestroyed())
+      .subscribe({
+        next: (products) => this.products.set(products),
+        error: (error) => console.error(error),
+      });
   }
 
   toggleImage() {
@@ -51,6 +52,6 @@ export class ProductsPage {
   }
 
   deleteProduct(product: Product) {
-    this.products$.next(this.products$.getValue().filter(p => p !== product));
+    this.products$.next(this.products$.getValue().filter((p) => p !== product));
   }
 }

@@ -8,7 +8,7 @@ import { ProductsResponse, SingleProductResponse } from '../interfaces/responses
   providedIn: 'root',
 })
 export class ProductsService {
- #productsUrl = 'https://api.fullstackpro.es/products-example/products';
+  #productsUrl = 'products';
   #http = inject(HttpClient);
 
   getProducts(): Observable<Product[]> {
@@ -16,7 +16,7 @@ export class ProductsService {
       .get<ProductsResponse>(`${this.#productsUrl}`)
       .pipe(map((resp) => resp.products));
   }
-  
+
   changeRating(idProduct: number, rating: number): Observable<void> {
     return this.#http.put<void>(`${this.#productsUrl}/${idProduct}/rating`, {
       rating: rating,
@@ -28,7 +28,7 @@ export class ProductsService {
       .post<SingleProductResponse>(this.#productsUrl, product)
       .pipe(map((resp) => resp.product));
   }
-  
+
   deleteProduct(id: number): Observable<void> {
     return this.#http.delete<void>(`${this.#productsUrl}/${id}`);
   }

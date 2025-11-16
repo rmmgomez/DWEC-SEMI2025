@@ -16,8 +16,8 @@
                 Filtered by: {{ search() }}
             </div>
         </div>
-        @let filteredProducts = filteredProducts$ | async;
-        @if (filteredProducts?.length) {
+
+        @if (filteredProducts().length) {
         <div class="row headers g-0">
             <div class="col-2">
                 @let buttonText = (showImage()?'Hide':'Show') + ' images';
@@ -34,7 +34,7 @@
             <div class="col my-auto">Puntuación</div>
             <div class="col-auto" style="width: 2em;"></div>
         </div>
-        @for (product of filteredProducts; track product.id) {
+        @for (product of filteredProducts(); track product.id) {
         <product-item [product]="product" [showImage]="showImage()" class="row g-0"
             (deleted)="deleteProduct(product)" />
         }
