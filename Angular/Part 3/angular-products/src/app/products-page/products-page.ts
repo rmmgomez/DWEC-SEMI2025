@@ -1,12 +1,17 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { Product } from '../interfaces/product';
 import { NgClass } from '@angular/common';
 import { ProductItem } from '../product-item/product-item';
 import { ProductForm } from '../product-form/product-form';
 import { FormsModule } from '@angular/forms';
 import { ProductsService } from '../services/products-service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'products-page',
@@ -17,12 +22,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductsPage {
   title = 'Mi lista de productos';
-  products = signal<Product[]>([]); /* Ahora los obtenemos del servicio */
   showImage = signal(true);
   fileName = '';
   search = signal('');
-  #productsService = inject(ProductsService); // Inyectamos el servicio
-  products$ = new BehaviorSubject<Product[]>([]);
+  readonly #productsService = inject(ProductsService); // Inyectamos el servicio
+  readonly productsResource = this.#productsService.productsResource;
+  products = linkedSignal(() => this.productsResource.value().products);
 
   filteredProducts = computed(() => {
     return this.search()
@@ -33,13 +38,13 @@ export class ProductsPage {
   });
 
   constructor() {
-    this.#productsService
+    /* this.#productsService
       .getProducts()
       .pipe(takeUntilDestroyed())
       .subscribe({
         next: (products) => this.products.set(products),
         error: (error) => console.error(error),
-      });
+      }); */
   }
 
   toggleImage() {
@@ -48,10 +53,10 @@ export class ProductsPage {
   }
 
   addProduct(product: Product) {
-    this.products$.next([...this.products$.getValue(), product]);
+    this.products.update((products) => products.concat(product));
   }
 
   deleteProduct(product: Product) {
-    this.products$.next(this.products$.getValue().filter((p) => p !== product));
+    this.products.update((products) => products.filter((p) => p !== product));
   }
 }

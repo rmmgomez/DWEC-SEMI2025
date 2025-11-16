@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, Signal } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { ProductsResponse, SingleProductResponse } from '../interfaces/responses';
 
@@ -10,12 +10,21 @@ import { ProductsResponse, SingleProductResponse } from '../interfaces/responses
 export class ProductsService {
   #productsUrl = 'products';
   #http = inject(HttpClient);
+  // Resource compartido para la aplicación
+  readonly productsResource = httpResource<ProductsResponse>(() => `products`, {
+    defaultValue: { products: [] },
+  });
 
-  getProducts(): Observable<Product[]> {
+  getProductIdResource(id: Signal<string>) {
+    return httpResource(
+      () => (id() ? `products/${id()}` : undefined) // Cuando es undefined no lanza petición http
+    );
+  }
+  /* getProducts(): Observable<Product[]> {
     return this.#http
       .get<ProductsResponse>(`${this.#productsUrl}`)
       .pipe(map((resp) => resp.products));
-  }
+  } */
 
   changeRating(idProduct: number, rating: number): Observable<void> {
     return this.#http.put<void>(`${this.#productsUrl}/${idProduct}/rating`, {
