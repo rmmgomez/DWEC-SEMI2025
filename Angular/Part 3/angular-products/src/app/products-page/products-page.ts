@@ -7,7 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { NgClass } from '@angular/common';
 import { ProductItem } from '../product-item/product-item';
 import { ProductForm } from '../product-form/product-form';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +14,7 @@ import { ProductsService } from '../services/products-service';
 
 @Component({
   selector: 'products-page',
-  imports: [NgClass, ProductItem, ProductForm, FormsModule],
+  imports: [ProductItem, ProductForm, FormsModule],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

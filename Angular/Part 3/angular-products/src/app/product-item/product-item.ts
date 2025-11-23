@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, DestroyRef, inject, input, output } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
-import { StarRating } from "../star-rating/star-rating";
+import { StarRating } from '../star-rating/star-rating';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductsService } from '../services/products-service';
 
@@ -26,7 +26,8 @@ export class ProductItem {
       .changeRating(this.product().id!, rating)
       .pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe({
-        error: () => { // Ha habido un error (puntuación no cambiada en el servidor)
+        error: () => {
+          // Ha habido un error (puntuación no cambiada en el servidor)
           this.product().rating = oldRating; // Restauramos puntuación
           this.#changeDetector.markForCheck(); // Detectar cambio
         },

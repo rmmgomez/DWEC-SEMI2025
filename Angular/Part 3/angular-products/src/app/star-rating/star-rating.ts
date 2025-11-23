@@ -1,9 +1,8 @@
 import { Component, effect, model, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'star-rating',
-  imports: [NgClass],
+  imports: [],
   templateUrl: './star-rating.html',
   styleUrl: './star-rating.css',
 })
