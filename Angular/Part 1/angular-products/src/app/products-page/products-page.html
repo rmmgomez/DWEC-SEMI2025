@@ -56,7 +56,7 @@
                     <tr>
                         <th>
                             @let buttonText = (showImage?'Hide':'Show') + ' images';
-                            <button class="btn btn-sm" [ngClass]="{
+                            <button class="btn btn-sm" [class]="{
                 'btn-danger': this.showImage,
                 'btn-primary': !this.showImage,
             }" (click)="toggleImage()">

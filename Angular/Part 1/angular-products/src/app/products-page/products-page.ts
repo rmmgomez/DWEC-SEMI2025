@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Product } from '../interfaces/product';
-import { NgClass } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'products-page',
-  imports: [NgClass, FormsModule],
+  imports: [FormsModule],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
 })
