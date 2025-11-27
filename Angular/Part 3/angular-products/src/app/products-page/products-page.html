@@ -21,7 +21,7 @@
         <div class="row headers g-0">
             <div class="col-2">
                 @let buttonText = (showImage()?'Hide':'Show') + ' images';
-                <button class="btn btn-sm" [ngClass]="{
+                <button class="btn btn-sm" [class]="{
                 'btn-danger': this.showImage(),
                 'btn-primary': !this.showImage(),
               }" (click)="toggleImage()">
