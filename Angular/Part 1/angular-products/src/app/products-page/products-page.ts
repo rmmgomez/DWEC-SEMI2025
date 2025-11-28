@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { FormsModule, NgForm } from '@angular/forms';
 
@@ -7,6 +7,7 @@ import { FormsModule, NgForm } from '@angular/forms';
   imports: [FormsModule],
   templateUrl: './products-page.html',
   styleUrl: './products-page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsPage {
   title = 'Mi lista de productos';

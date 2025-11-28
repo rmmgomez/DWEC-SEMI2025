@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, inject, output } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { FormsModule, NgForm } from '@angular/forms';
 import { EncodeBase64Directive } from '../directives/encode-base64Directive';
@@ -10,6 +10,7 @@ import { ProductsService } from '../services/products-service';
   imports: [FormsModule, EncodeBase64Directive],
   templateUrl: './product-form.html',
   styleUrl: './product-form.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductForm {
   add = output<Product>();

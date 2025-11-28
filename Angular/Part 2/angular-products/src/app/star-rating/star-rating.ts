@@ -1,4 +1,4 @@
-import { Component, effect, model, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, model, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -6,6 +6,7 @@ import { NgClass } from '@angular/common';
   imports: [NgClass],
   templateUrl: './star-rating.html',
   styleUrl: './star-rating.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarRating {
   rating = model.required<number>();

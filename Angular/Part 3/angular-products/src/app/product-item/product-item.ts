@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DestroyRef, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, input, output } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
 import { StarRating } from '../star-rating/star-rating';
@@ -10,6 +10,7 @@ import { ProductsService } from '../services/products-service';
   imports: [DatePipe, UpperCasePipe, CurrencyPipe, StarRating],
   templateUrl: './product-item.html',
   styleUrl: './product-item.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductItem {
   product = input.required<Product>(); // required (obligatorio)
