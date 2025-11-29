@@ -20,9 +20,9 @@ export class ProductsService {
       .get<SingleProductResponse>(`${this.#productsUrl}/${id}`)
       .pipe(map((resp) => resp.product));
   }
-  
-  getProductIdResource(id: Signal<string>) {
-    return httpResource(
+
+  getProductIdResource(id: Signal<number>) {
+    return httpResource<SingleProductResponse>(
       () => (id() ? `products/${id()}` : undefined) // Cuando es undefined no lanza petición http
     );
   }

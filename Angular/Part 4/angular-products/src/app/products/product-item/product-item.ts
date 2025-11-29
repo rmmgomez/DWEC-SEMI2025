@@ -1,7 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, DestroyRef, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { Product } from '../interfaces/product';
 import { CurrencyPipe, DatePipe, UpperCasePipe } from '@angular/common';
-import { StarRating } from '../star-rating/star-rating';
+import { StarRating } from '../../shared/star-rating/star-rating';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductsService } from '../services/products-service';
 import { RouterLink } from '@angular/router';
@@ -11,7 +19,7 @@ import { RouterLink } from '@angular/router';
   imports: [DatePipe, UpperCasePipe, CurrencyPipe, StarRating, RouterLink],
   templateUrl: './product-item.html',
   styleUrl: './product-item.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItem {
   product = input.required<Product>(); // required (obligatorio)
