@@ -1,0 +1,163 @@
+<div class="card mb-4">
+    <div class="card-header bg-success text-white">Add product</div>
+    <div class="card-body">
+        <form (ngSubmit)="addProduct()" #productForm="ngForm" [equalValues]="['email', 'email2']">
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Description</span>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="description" minlength="5" maxlength="60" required
+                        [(ngModel)]="newProduct.description" #descModel="ngModel" [class]="{
+                            'is-valid': descModel.touched && descModel.valid,
+                            'is-invalid': descModel.touched && !descModel.valid
+                        }" />
+                    @if(descModel.errors?.['required']) {
+                    <div class="invalid-feedback">Description cannot be empty</div>
+                    }
+                    @if(descModel.errors?.['minlength']) {
+                    <div class="invalid-feedback">
+                        You must enter at least
+                        {{descModel.errors?.['minlength'].requiredLength -
+                        descModel.errors?.['minlength'].actualLength}}
+                        characters more
+                    </div>
+                    }
+                </div>
+            </label>
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Price</span>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="price" [(ngModel)]="newProduct.price" />
+                </div>
+            </label>
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Available</span>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="available" required minDate="2021-09-01"
+                        [(ngModel)]="newProduct.available" #availModel="ngModel" [class]="{
+                            'is-valid': availModel.touched && availModel.valid,
+                            'is-invalid': availModel.touched && !availModel.valid
+                        }" />
+                    @if(availModel.errors?.['required']) {
+                    <div class="invalid-feedback">La fecha es obligatoria</div>
+                    }
+                    @if(availModel.errors?.['minDate']) {
+                    <div class="invalid-feedback">
+                        La fecha no puede ser anterior a {{'2021-09-01' | date:'dd/MM/yyyy'}}
+                    </div>
+                    }
+                </div>
+            </label>
+            <!-- OPCION 1 -->
+            <!--             <ng-container ngModelGroup="emailGroup" #emailGroupModel="ngModelGroup" [equalValues]="['email', 'email2']">
+                <label class="mb-3 row">
+                    <span class="col-sm-2 col-form-label text-sm-end">Email</span>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" required email [(ngModel)]="email"
+                            #emailModel="ngModel" [class]="{
+                            'is-valid': emailModel.touched && emailModel.valid,
+                            'is-invalid': emailModel.touched && emailModel.invalid,
+                            }" />
+                        <div class="invalid-feedback">
+                            El email es obligatorio y debe tener un formato correcto
+                        </div>
+                    </div>
+                </label>
+                <label class="mb-3 row">
+                    <span class="col-sm-2 col-form-label text-sm-end">Repite email</span>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email2" ngModel #email2Model="ngModel" [class]="{
+                        'is-valid': email2Model.touched && !emailGroupModel.errors?.['equalValues'],
+                        'is-invalid': email2Model.touched && emailGroupModel.errors?.['equalValues'],
+                        }" />
+                        <div class="invalid-feedback">Los correos no coinciden</div>
+                    </div>
+                </label>
+            </ng-container> -->
+            <!-- OPCION 2 -->
+            <!-- <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Email</span>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email" ngModel #emailModel="ngModel" [class]="{
+                        'is-valid': emailModel.touched && !productForm.errors?.['equalValues'],
+                        'is-invalid': emailModel.touched && productForm.errors?.['equalValues'],
+                        }" />
+                    <div class="invalid-feedback">Los correos no coinciden</div>
+                </div>
+            </label>
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Repite email</span>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email2" ngModel #email2Model="ngModel" [class]="{
+                    'is-valid': email2Model.touched && !productForm.errors?.['equalValues'],
+                    'is-invalid': email2Model.touched && productForm.errors?.['equalValues'],
+                    }" />
+                    <div class="invalid-feedback">Los correos no coinciden</div>
+                </div>
+            </label> -->
+            <!-- OPCION 3 -->
+            <!-- <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Email</span>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email" ngModel #emailModel="ngModel"
+                        [(ngModel)]="email" [sameValue]="email()" [class]="{
+          'is-valid': emailModel.touched && emailModel.valid,
+          'is-invalid': emailModel.touched && emailModel.invalid,
+        }" />
+                    <div class="invalid-feedback">Los correos no coinciden</div>
+                </div>
+            </label>
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end">Repite email</span>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="email2" ngModel #emailRepeatModel="ngModel"
+                        [sameValue]="email()" [class]="{
+          'is-valid': emailRepeatModel.touched && emailRepeatModel.valid,
+          'is-invalid': emailRepeatModel.touched && emailRepeatModel.invalid,
+        }" />
+                    <div class="invalid-feedback">Los correos no coinciden</div>
+                </div>
+            </label> -->
+            <!-- <div class="row mb-3" ngModelGroup="daysGroup" #daysModel="ngModelGroup" oneChecked>
+                <span class="col-sm-2 col-form-label text-sm-end">Días </span>
+                <div class="col-sm-10">
+                    @for(day of days; track $index; let i = $index) {
+                    <div class=" pt-2 col-1 form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input" name="days{{i}}" [(ngModel)]="daysOpen[i]"
+                            id="checkDay{{i}}">
+                        <label class="form-check-label" for="checkDay{{i}}">{{day}}</label>
+                    </div>
+                    }
+                    @if(daysModel.invalid) {
+                    <div class="text-danger">You must select at least one input</div>
+                    }
+                </div>
+            </div> -->
+            <label class="mb-3 row">
+                <span class="col-sm-2 col-form-label text-sm-end"> Image</span>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" accept="image/*" encodeBase64Directive
+                        (encoded)="newProduct.imageUrl = $event" name="fileName" required ngModel #imageModel="ngModel"
+                        [class]="{
+                            'is-valid': imageModel.touched && imageModel.valid,
+                            'is-invalid': imageModel.touched && !imageModel.valid
+                        }" />
+                </div>
+            </label>
+            @if (newProduct.imageUrl) {
+            <div class="row mb-3">
+                <div class="col-sm-10 offset-sm-2">
+                    <img class="product-img" [src]="newProduct.imageUrl" alt="" />
+                </div>
+            </div>
+            }
+
+            <div class="mb-3 row">
+                <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>

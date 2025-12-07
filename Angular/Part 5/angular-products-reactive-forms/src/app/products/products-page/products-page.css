@@ -1,0 +1,20 @@
+td {
+    vertical-align: middle;
+
+    img {
+        height: 40px;
+    }
+}
+
+form {
+    img {
+        width: 400px;
+    }
+}
+
+.headers {
+    font-weight: bold;
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+    padding: 5px;
+}

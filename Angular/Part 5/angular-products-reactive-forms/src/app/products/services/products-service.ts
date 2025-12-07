@@ -1,7 +1,7 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { HttpClient, httpResource } from '@angular/common/http';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ProductsResponse, SingleProductResponse } from '../interfaces/responses';
 
 @Injectable({
@@ -14,6 +14,11 @@ export class ProductsService {
   readonly productsResource = httpResource<ProductsResponse>(() => `products`, {
     defaultValue: { products: [] },
   });
+
+  getProductsSearchResource(search: Signal<string>) {
+    const queryParams = computed(() => new URLSearchParams({ search: search() }).toString());
+    return httpResource<ProductsResponse>(() => `products?${queryParams()}`);
+  }
 
   getProduct(id: number): Observable<Product> {
     return this.#http
@@ -34,15 +39,12 @@ export class ProductsService {
   }
 
   insertProduct(product: Product): Observable<Product> {
-    return this.#http.post<SingleProductResponse>(this.#productsUrl, product).pipe(
-      map((resp) => resp.product),
-      tap(() => this.productsResource.reload()),
-    );
+    return this.#http
+      .post<SingleProductResponse>(this.#productsUrl, product)
+      .pipe(map((resp) => resp.product));
   }
 
   deleteProduct(id: number): Observable<void> {
-    return this.#http
-      .delete<void>(`${this.#productsUrl}/${id}`)
-      .pipe(tap(() => this.productsResource.reload()));
+    return this.#http.delete<void>(`${this.#productsUrl}/${id}`);
   }
 }

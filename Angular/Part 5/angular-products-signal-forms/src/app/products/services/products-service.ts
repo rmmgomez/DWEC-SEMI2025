@@ -18,7 +18,7 @@ export class ProductsService {
   getProduct(id: number): Observable<Product> {
     return this.#http
       .get<SingleProductResponse>(`${this.#productsUrl}/${id}`)
-      .pipe(map((resp) => resp.product));
+      .pipe(map((resp: SingleProductResponse) => resp.product));
   }
 
   getProductIdResource(id: Signal<number>) {
@@ -35,7 +35,7 @@ export class ProductsService {
 
   insertProduct(product: Product): Observable<Product> {
     return this.#http.post<SingleProductResponse>(this.#productsUrl, product).pipe(
-      map((resp) => resp.product),
+      map((resp: SingleProductResponse) => resp.product),
       tap(() => this.productsResource.reload()),
     );
   }
