@@ -1,4 +1,4 @@
-import { inject, Injectable, Signal } from '@angular/core';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { Observable, map, tap } from 'rxjs';
@@ -19,6 +19,10 @@ export class ProductsService {
     return this.#http
       .get<SingleProductResponse>(`${this.#productsUrl}/${id}`)
       .pipe(map((resp: SingleProductResponse) => resp.product));
+  }
+  getProductsSearchResource(search: Signal<string>) {
+    const queryParams = computed(() => new URLSearchParams({ search: search() }).toString());
+    return httpResource<ProductsResponse>(() => `products?${queryParams()}`);
   }
 
   getProductIdResource(id: Signal<number>) {

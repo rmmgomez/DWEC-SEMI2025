@@ -8,7 +8,7 @@
                 Filter:
             </label>
             <div class="col-sm-5">
-                <input type="text" [(ngModel)]="search" class="form-control" id="filterDesc" placeholder="Filter..." />
+                <input type="text" [field]="searchField" class="form-control" id="filterDesc" placeholder="Filter..." />
             </div>
             <div class="col-form-label col-sm-5">
                 Filtered by: {{ search() }}
@@ -32,7 +32,7 @@
             <div class="col my-auto">Puntuación</div>
             <div class="col-auto" style="width: 2em;"></div>
         </div>
-        @for (product of filteredProducts(); track product.id) {
+        @for (product of products(); track product.id) {
         <product-item [product]="product" [showImage]="showImage()" class="row g-0"
             (deleted)="deleteProduct(product)" />
         }

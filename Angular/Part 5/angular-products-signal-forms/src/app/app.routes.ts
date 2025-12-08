@@ -7,6 +7,11 @@ export const routes: Routes = [
     title: 'Bienvenido | Angular Products',
   },
   {
+    path: 'register',
+    loadComponent: () => import('./register/register').then((m) => m.Register),
+    title: 'Register | Angular Products',
+  },
+  {
     path: 'products',
     loadChildren: () => import('./products/products.routes').then((m) => m.productsRoutes),
   },
