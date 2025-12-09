@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, linkedSignal, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, linkedSignal, model} from '@angular/core';
 
 @Component({
   selector: 'star-rating',
   imports: [],
   templateUrl: './star-rating.html',
   styleUrl: './star-rating.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StarRating {
   rating = model.required<number>();

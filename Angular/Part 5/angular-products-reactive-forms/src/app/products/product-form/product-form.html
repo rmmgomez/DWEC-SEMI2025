@@ -1,0 +1,144 @@
+<div class="card mb-4">
+  <div class="card-header bg-success text-white">Add product</div>
+  <div class="card-body">
+    <form (ngSubmit)="addProduct()" [formGroup]="productForm">
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Description</span>
+        <div class="col-sm-10">
+          @let descModel = productForm.get('description')!;
+          <input type="text" class="form-control" formControlName="description" [class]="{
+                        'is-valid': descModel.touched && descModel.valid,
+                        'is-invalid': descModel.touched && !descModel.valid
+                    }" />
+          @if(descModel.errors?.['required']) {
+          <div class="invalid-feedback">Description cannot be empty</div>
+          }
+          @if(descModel.errors?.['minlength']) {
+          <div class="invalid-feedback">
+            You must enter at least
+            {{descModel.errors?.['minlength'].requiredLength -
+            descModel.errors?.['minlength'].actualLength}}
+            characters more
+          </div>
+          }
+        </div>
+      </label>
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Price</span>
+        <div class="col-sm-10">
+          @let priceModel = productForm.get('price')!;
+          <input type="number" class="form-control" formControlName="price" [class]="{
+                        'is-valid': priceModel.touched && priceModel.valid,
+                        'is-invalid': priceModel.touched && !priceModel.valid
+                    }" />
+          @if(priceModel.errors?.['required']) {
+          <div class="invalid-feedback">Price cannot be empty</div>
+          }
+          @if(priceModel.errors?.['min']) {
+          <div class="invalid-feedback">
+            Price cannot be less than 0.1€
+          </div>
+          }
+        </div>
+      </label>
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Available</span>
+        <div class="col-sm-10">
+          @let availableModel = productForm.get('available')!;
+          <input type="date" class="form-control" formControlName="available" [class]="{
+                        'is-valid': availableModel.touched && availableModel.valid,
+                        'is-invalid': availableModel.touched && !availableModel.valid
+                    }" />
+          @if(availableModel.errors?.['required']) {
+          <div class="invalid-feedback">Available cannot be empty</div>
+          }
+        </div>
+      </label>
+      <div class="mb-3 row" formArrayName="daysOpen">
+        <span class="col-sm-2 col-form-label text-sm-end"> Days</span>
+        <div class="col-sm-10">
+          @for(day of productForm.controls.daysOpen.controls; track day; let i = $index) {
+
+          <div class="form-check form-check-inline">
+            <!-- Inputs must have DIFFERENT names -->
+            <input type="checkbox" class="form-check-input" [formControlName]="i" id="day{{i}}">
+            <label class="custom-control-label ms-2" for="day{{i}}">{{days[i]}}</label>
+          </div>
+
+          }
+        </div>
+        <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            @if(productForm.controls.daysOpen.invalid) {
+            <div class="text-danger">
+              Debes seleccionar al menos un día
+            </div>
+            }
+          </div>
+        </div>
+      </div>
+      <ng-container [formGroup]="emailGroup">
+        <label class="mb-3 row">
+          <span class="col-sm-2 col-form-label text-sm-end">Email</span>
+          <div class="col-sm-10">
+            @let emailModel = emailGroup.get('email')!;
+            <input type="email" class="form-control" formControlName="email" [class]="{
+                        'is-valid': emailModel.touched && emailModel.valid,
+                        'is-invalid': emailModel.touched && !emailModel.valid
+                    }" />
+            @if(emailModel.errors) {
+            <div class="invalid-feedback">
+              El email es obligatorio y debe tener un formato correcto
+            </div>
+            }
+          </div>
+        </label>
+        <label class="mb-3 row">
+          <span class="col-sm-2 col-form-label text-sm-end">Repite email</span>
+          <div class="col-sm-10">
+            @let emailConfirmModel = emailGroup.get('emailConfirm')!;
+            <input type="email" class="form-control" formControlName="emailConfirm" [class]="{
+                        'is-valid': emailConfirmModel.touched && emailConfirmModel.valid && emailGroup.valid,
+                        'is-invalid': emailConfirmModel.touched && (!emailConfirmModel.valid || !emailGroup.valid)
+                    }" />
+            @if(emailConfirmModel.errors) {
+            <div class="invalid-feedback">
+              El email es obligatorio y debe tener un formato correcto
+            </div>
+            }
+            @if(emailGroup.errors?.['match']) {
+            <div class="invalid-feedback">Los correos no coinciden</div>
+            }
+          </div>
+        </label>
+      </ng-container>
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end"> Image</span>
+        <div class="col-sm-10">
+          @let imageUrlModel = productForm.get('imageUrl')!;
+          <input type="file" class="form-control" accept="image/*" encodeBase64Directive
+            (encoded)="imageBase64 = $event" name="fileName" [class]="{
+                        'is-valid': imageUrlModel.touched && imageUrlModel.valid,
+                        'is-invalid': imageUrlModel.touched && !imageUrlModel.valid
+                    }" />
+          @if(imageUrlModel.errors?.['required']) {
+          <div class="invalid-feedback">Image cannot be empty</div>
+          }
+        </div>
+      </label>
+      @if (imageBase64) {
+      <div class="row mb-3">
+        <div class="col-sm-10 offset-sm-2">
+          <img class="product-img" [src]="imageBase64" alt="" />
+        </div>
+      </div>
+      }
+      <div class="mb-3 row">
+        <div class="offset-sm-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
