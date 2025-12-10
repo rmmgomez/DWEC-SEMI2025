@@ -48,8 +48,11 @@
             }
 
             <div class="mb-3 row">
-                <div class="offset-sm-2 col-sm-10">
+                <div class="offset-sm-2 col-sm-1">
                     <button type="submit" class="btn btn-primary" [disabled]="productForm().invalid()">Submit</button>
+                </div>
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary" (click)="resetForm()">Reset</button>
                 </div>
             </div>
         </form>
