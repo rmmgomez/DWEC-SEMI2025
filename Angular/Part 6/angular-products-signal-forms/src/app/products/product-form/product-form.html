@@ -49,7 +49,10 @@
 
             <div class="mb-3 row">
                 <div class="offset-sm-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary" [disabled]="productForm().invalid()">Submit</button>
+                    <!-- <button type="submit" class="btn btn-primary" [disabled]="productForm().invalid()">Submit</button> -->
+                    <load-button [loading]="loading" (click)="loading = !loading" type="submit" class="btn btn-primary">
+                        Submit
+                    </load-button>
                 </div>
             </div>
         </form>

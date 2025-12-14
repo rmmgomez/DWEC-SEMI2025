@@ -7,10 +7,11 @@ import { Router } from '@angular/router';
 import { CanComponentDeactivate } from '../../shared/guards/leave-page-guard';
 import { Field, form, min, minLength, required, validate } from '@angular/forms/signals';
 import { minDate } from '../../shared/validators/min-date';
+import { LoadButton } from '../../load-button/load-button';
 
 @Component({
   selector: 'product-form',
-  imports: [FormsModule, EncodeBase64Directive, Field],
+  imports: [FormsModule, EncodeBase64Directive, Field, LoadButton],
   templateUrl: './product-form.html',
   styleUrl: './product-form.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +24,7 @@ export class ProductForm implements CanComponentDeactivate {
     rating: 1,
     price: 0,
   });
+  loading = false;
   days = ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'];
 
   productForm = form(this.productModel, (schema) => {
