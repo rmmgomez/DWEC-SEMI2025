@@ -1,0 +1,53 @@
+<div class="card mb-4">
+  <div class="card-header bg-success text-white">Ejemplo fake de registro</div>
+  <div class="card-body">
+    <form>
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Email</span>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" [field]="userForm.email" />
+          @for (error of userForm.email().errors(); track error.kind) {
+            <div class="invalid-feedback">{{ error.message }}</div>
+          }
+        </div>
+      </label>
+      <label class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Repeat email</span>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" [field]="userForm.repeatEmail" />
+          @for (error of userForm.repeatEmail().errors(); track error.kind) {
+            <div class="invalid-feedback">{{ error.message }}</div>
+          }
+        </div>
+      </label>
+      <div class="mb-3 row">
+        <span class="col-sm-2 col-form-label text-sm-end">Days</span>
+        <div class="col-sm-10">
+          @for (day of userForm.daysOpen().value(); track $index) {
+            <div class="form-check form-check-inline">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [field]="userForm.daysOpen[$index]"
+                [id]="'day' + $index"
+              />
+              <label class="custom-control-label ms-2" [for]="'day' + $index">{{
+                days[$index]
+              }}</label>
+            </div>
+          }
+          @for (error of userForm.daysOpen().errors(); track error.kind) {
+            <div class="text-danger">{{ error.message }}</div>
+          }
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="offset-sm-2 col-sm-10">
+          <button type="submit" class="btn btn-primary" [disabled]="userForm().invalid()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

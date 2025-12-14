@@ -1,0 +1,13 @@
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+
+@Component({
+  selector: 'load-button',
+  imports: [],
+  templateUrl: './load-button.html',
+  styleUrl: './load-button.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class LoadButton {
+  colorClass = input('btn-primary');
+  loading = input(false);
+}

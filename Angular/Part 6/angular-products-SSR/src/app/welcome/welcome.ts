@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SwalComponent, SwalDirective } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'welcome',
-  imports: [RouterLink, SwalComponent, SwalDirective],
+  imports: [RouterLink],
   templateUrl: './welcome.html',
   styleUrl: './welcome.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -13,7 +13,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { baseUrlInterceptor } from './shared/interceptors/base-url-interceptor';
 import { provideSignalFormsConfig, SignalFormsConfig } from '@angular/forms/signals';
-import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 
 /* Para Tailwind necesitamos vaid, invalid y touched */
 export const NG_STATUS_CLASSES: SignalFormsConfig['classes'] = {
@@ -38,11 +38,6 @@ export const appConfig: ApplicationConfig = {
         'is-valid': (state) => state.touched() && state.valid(),
         'is-invalid': (state) => state.touched() && state.invalid(),
       },
-    }),
-    provideSweetAlert2({
-      // Optional configuration
-      fireOnInit: false,
-      dismissOnDestroy: true,
-    }),
+    }), provideClientHydration(withEventReplay()),
   ],
 };
