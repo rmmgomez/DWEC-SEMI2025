@@ -12,8 +12,8 @@ export const routes: Routes = [
     title: 'Register | Angular Products',
   },
   {
-    path: 'proyeccion',
-    loadComponent: () => import('./proyeccion/proyeccion').then((m) => m.Proyeccion),
+    path: 'mapa',
+    loadComponent: () => import('./shared/mapa/mapa').then((m) => m.Mapa),
     title: 'Proyeccion | Angular Products',
   },
   {

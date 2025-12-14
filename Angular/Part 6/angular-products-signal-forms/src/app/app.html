@@ -3,12 +3,8 @@
     <a class="navbar-brand" [routerLink]="['/products']">{{ title() }}</a>
     <ul class="navbar-nav me-auto">
       <li class="nav-item">
-        <a
-          class="nav-link"
-          [routerLink]="['/products']"
-          [routerLinkActive]="['active']"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
+        <a class="nav-link" [routerLink]="['/products']" [routerLinkActive]="['active']"
+          [routerLinkActiveOptions]="{ exact: true }">
           Products
         </a>
       </li>
@@ -21,7 +17,12 @@
         <a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="['active']">
           Register
         </a>
-      </li>      
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/mapa']" [routerLinkActive]="['active']">
+          Mapa
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

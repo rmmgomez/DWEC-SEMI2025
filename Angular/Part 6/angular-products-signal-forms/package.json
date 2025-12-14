@@ -34,8 +34,10 @@
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-regular-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@geoapify/geocoder-autocomplete": "^3.0.1",
     "@sweetalert2/ngx-sweetalert2": "^14.1.1",
     "bootstrap": "^5.3.8",
+    "ol": "^10.7.0",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.26.10",
     "tslib": "^2.3.0"
@@ -44,6 +46,7 @@
     "@angular/build": "^21.0.1",
     "@angular/cli": "^21.0.1",
     "@angular/compiler-cli": "^21.0.1",
+    "@types/facebook-js-sdk": "^3.3.12",
     "@types/google.accounts": "^0.0.18",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "21.0.1",
