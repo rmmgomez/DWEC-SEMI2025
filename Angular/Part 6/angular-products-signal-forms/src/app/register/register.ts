@@ -1,14 +1,20 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { form, required, email, validate, Field } from '@angular/forms/signals';
+import { GoogleLogin } from '../google-login/google-login';
+import { FormsModule } from '@angular/forms';
+import { FbLogin } from '../facebook-login/fb-login';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'register',
-  imports: [Field],
+  imports: [Field, GoogleLogin, FormsModule, FbLogin, FontAwesomeModule],
   templateUrl: './register.html',
   styleUrl: './register.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Register {
+  iconFacebook = faFacebook;
   userModel = signal({
     name: '',
     email: '',
@@ -41,4 +47,17 @@ export class Register {
       return null;
     });
   });
+  loggedGoogle(resp: google.accounts.id.CredentialResponse) {
+    // Envia esto tu API
+    console.log(resp.credential);
+  }
+
+  loggedFacebook(resp: fb.StatusResponse) {
+    // Envía esto a tu API
+    console.log(resp.authResponse.accessToken);
+  }
+
+  showError(error: any) {
+    console.error(error);
+  }
 }

@@ -42,10 +42,25 @@
         </div>
       </div>
       <div class="mb-3 row">
-        <div class="offset-sm-2 col-sm-10">
+        <div class="col-2 offset-sm-2">
           <button type="submit" class="btn btn-primary" [disabled]="userForm().invalid()">
             Submit
           </button>
+        </div>
+      </div>
+      <div class="row ">
+        <div googleLogin class="btn col-5 offset-sm-2" (login)="loggedGoogle($event)"></div>
+        <div class="col-5 my-1">
+        <button
+          fbLogin
+          [scopes]="['email', 'public_profile']"
+          class="btn btn-primary p-2"
+          (loginOk)="loggedFacebook($event)"
+          (loginError)="showError($event)"
+        >
+          <fa-icon [icon]="iconFacebook"></fa-icon>
+          Login con Facebook
+        </button>
         </div>
       </div>
     </form>

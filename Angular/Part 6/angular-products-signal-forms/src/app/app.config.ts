@@ -14,6 +14,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { baseUrlInterceptor } from './shared/interceptors/base-url-interceptor';
 import { provideSignalFormsConfig, SignalFormsConfig } from '@angular/forms/signals';
 import { provideSweetAlert2 } from '@sweetalert2/ngx-sweetalert2';
+import { provideGoogleId } from './shared/google/google-login.config';
+import { provideFacebookId } from './shared/facebook/facebook-login.config';
 
 /* Para Tailwind necesitamos vaid, invalid y touched */
 export const NG_STATUS_CLASSES: SignalFormsConfig['classes'] = {
@@ -44,5 +46,7 @@ export const appConfig: ApplicationConfig = {
       fireOnInit: false,
       dismissOnDestroy: true,
     }),
+    provideGoogleId('1002957697747-v0fevraaubhn6dl6g2a474l92k2b0cg3.apps.googleusercontent.com'),
+    provideFacebookId('2699002260432657', 'v24.0')
   ],
 };
