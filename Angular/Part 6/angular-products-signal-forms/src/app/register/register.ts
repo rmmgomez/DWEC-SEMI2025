@@ -55,6 +55,7 @@ export class Register {
   loggedFacebook(resp: fb.StatusResponse) {
     // Envía esto a tu API
     console.log(resp.authResponse.accessToken);
+    
   }
 
   showError(error: any) {

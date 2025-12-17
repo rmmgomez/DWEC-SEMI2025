@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { leavePageGuard } from '../shared/guards/leave-page-guard';
 import { numericIdGuard } from '../shared/guards/numeric-id-guard';
-import { productResolver } from './resolvers/product-resolver';
 
 export const productsRoutes: Routes = [
   {
@@ -19,9 +18,7 @@ export const productsRoutes: Routes = [
     path: ':id',
     canDeactivate: [leavePageGuard],
     canActivate: [numericIdGuard],
-    resolve: {
-      product: productResolver,
-    },
+    /* No tiene sentido usar el resolver */
     loadComponent: () => import('./product-detail/product-detail').then((m) => m.ProductDetail),
   },
 ];
