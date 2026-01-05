@@ -10,7 +10,7 @@ import {
   withPreloading,
 } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { baseUrlInterceptor } from './shared/interceptors/base-url-interceptor';
 import { provideSignalFormsConfig, SignalFormsConfig } from '@angular/forms/signals';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -31,13 +31,15 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding(), withPreloading(PreloadAllModules)),
-    provideHttpClient(withInterceptors([baseUrlInterceptor])),
+    provideHttpClient(withInterceptors([baseUrlInterceptor]), withFetch()),
+    provideClientHydration(withEventReplay()),
     provideSignalFormsConfig({
       classes: {
         ...NG_STATUS_CLASSES,
         'is-valid': (state) => state.touched() && state.valid(),
         'is-invalid': (state) => state.touched() && state.invalid(),
       },
-    }), provideClientHydration(withEventReplay()),
+    }),
+    provideClientHydration(withEventReplay()),
   ],
 };

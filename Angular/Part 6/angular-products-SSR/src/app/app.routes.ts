@@ -20,6 +20,12 @@ export const routes: Routes = [
     path: 'products',
     loadChildren: () => import('./products/products.routes').then((m) => m.productsRoutes),
   },
+  {
+    path: '404',
+    /* Podría crearme un componente de error */
+    loadComponent: () => import('./welcome/welcome').then((m) => m.Welcome),
+    title: 'Bienvenido | Angular Products',
+  },
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: '**', redirectTo: '/welcome' },
 ];

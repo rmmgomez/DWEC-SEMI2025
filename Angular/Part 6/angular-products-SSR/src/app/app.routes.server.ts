@@ -1,7 +1,7 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
 export const serverRoutes: ServerRoute[] = [
-  { path: 'profile/**', renderMode: RenderMode.Client }, // Páginas privadas de usuarios
+  { path: 'products/product-detail', renderMode: RenderMode.Client }, // Páginas privadas de usuarios
   {
     path: '404',
     renderMode: RenderMode.Server,
