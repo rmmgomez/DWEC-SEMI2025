@@ -32,6 +32,8 @@
     "@capacitor/android": "^8.0.0",
     "@capacitor/angular": "^2.0.3",
     "@capacitor/core": "latest",
+    "@capacitor/status-bar": "^8.0.0",
+    "@capawesome/capacitor-android-edge-to-edge-support": "^8.0.2",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@ng-bootstrap/ng-bootstrap": "^20.0.0",
     "@popperjs/core": "^2.11.8",
