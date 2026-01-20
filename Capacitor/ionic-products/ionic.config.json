@@ -1,7 +1,0 @@
-{
-  "name": "ionic-products",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}

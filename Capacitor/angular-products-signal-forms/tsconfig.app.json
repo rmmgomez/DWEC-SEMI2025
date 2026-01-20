@@ -9,7 +9,8 @@
     ]
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "../ionic-products/ionic-products/src/app/products/product-detail/products.routes.ts"
   ],
   "exclude": [
     "src/**/*.spec.ts"

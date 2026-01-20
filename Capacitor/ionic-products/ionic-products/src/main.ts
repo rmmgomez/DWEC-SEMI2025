@@ -3,7 +3,9 @@ import {
   PreloadAllModules,
   RouteReuseStrategy,
   provideRouter,
+  withComponentInputBinding,
   withPreloading,
+  withRouterConfig,
 } from '@angular/router';
 import {
   IonicRouteStrategy,
@@ -23,7 +25,12 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideZonelessChangeDetection(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(
+      routes,
+      withPreloading(PreloadAllModules),
+      withComponentInputBinding(),
+      withRouterConfig({ paramsInheritanceStrategy: 'always' }),
+    ),
     provideHttpClient(withInterceptors([baseUrlInterceptor, authInterceptor])),
   ],
 });

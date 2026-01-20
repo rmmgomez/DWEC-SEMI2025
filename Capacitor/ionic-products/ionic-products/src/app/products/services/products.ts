@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { HttpClient, httpResource } from '@angular/common/http';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { Comment } from '../interfaces/comment';
@@ -22,10 +22,17 @@ export class Products {
       .pipe(map((resp) => resp.products));
   }
 
-  getProduct(id: number): Observable<Product> {
-    return this.#http
-      .get<SingleProductResponse>(`products/${id}`)
-      .pipe(map((resp) => resp.product));
+  getProductIdResource(id: Signal<number>) {
+    return httpResource<SingleProductResponse>(
+      () => (id() ? `products/${id()}` : undefined), // Cuando es undefined no lanza petición http
+    );
+  }
+
+  getProductsSearchResource(search: Signal<string>) {
+    const queryParams = computed(() =>
+      new URLSearchParams({ search: search() }).toString(),
+    );
+    return httpResource<ProductsResponse>(() => `products?${queryParams()}`);
   }
 
   addProduct(prod: Product): Observable<Product> {
@@ -46,9 +53,9 @@ export class Products {
       .pipe(map((resp) => resp.comment));
   }
 
-  getComments(idProd: number): Observable<Comment[]> {
-    return this.#http
-      .get<CommentsResponse>(`products/${idProd}/comments`)
-      .pipe(map((resp) => resp.comments));
+  getCommentsResource(id: Signal<number>) {
+    return httpResource<CommentsResponse>(
+      () => (id() ? `products/${id()}/comments` : undefined), // Cuando es undefined no lanza petición http
+    );
   }
 }

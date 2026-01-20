@@ -13,7 +13,10 @@ export const routes: Routes = [
   },
   {
     path: 'products',
-    loadChildren: () => import('./products/products.routes').then((m) => m.productsRoutes),
+    loadChildren: () =>
+      import('../../../ionic-products/ionic-products/src/app/products/product-detail/products.routes').then(
+        (m) => m.productsRoutes,
+      ),
   },
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: '**', redirectTo: '/welcome' },
